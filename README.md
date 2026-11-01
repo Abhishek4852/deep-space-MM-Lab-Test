@@ -1,243 +1,276 @@
-<div align="center">
+# Multimedia Systems Lab — Lab Test 2
+## Problem Statement: Develop a Customizable 2D Arcade Game
 
-# 🚀 Deep Space
-
-**A professional 2D top-down arcade space shooter built with Phaser 4, TypeScript, and Vite.**
-
-*Created by Abhishek Yaduwanshi (2026)*
-
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Phaser](https://img.shields.io/badge/Phaser-4.2-8B2FC9?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHBhdGggZD0iTTMyIDRMMTIgMjBsNCA0IDEyLTEwdjMyTDEyIDYwbDQtNCAyMC0xNiAyMCAxNiA0IDQtMjAtMTZWMTRsOSA4IDQtNHoiIGZpbGw9IndoaXRlIi8+PC9zdmc+)](https://phaser.io/)
-[![Vite](https://img.shields.io/badge/Vite-8.1-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
-
-[Play Now](#) &nbsp;·&nbsp; [Report Bug](https://github.com/me-hv/deep-space/issues) &nbsp;·&nbsp; [Request Feature](https://github.com/me-hv/deep-space/issues)
-
-</div>
+**Student Name:** Abhishek Yaduwanshi  
+**Course:** Multimedia Systems Lab  
+**Evaluation:** Lab Test 2  
+**Project Title:** Deep Space — 2D Top-Down Customizable Arcade Game  
+**Academic Year:** 2026  
+**Watermark:** Created by Abhishek Yaduwanshi 2026  
 
 ---
 
-## 📖 Overview
+## 📸 Screenshots Gallery
 
-**Deep Space** is a fast-paced, wave-based arcade space shooter where your only objective is to survive as long as possible. Fight through increasingly difficult waves of enemy fighters, collect power-ups, upgrade your weapons, and chase the high score.
-
-Built entirely with **Phaser 4**, **TypeScript**, and **Vite**, Deep Space is architected like a production game — with clean separation of concerns, an event-driven architecture, and systems designed to be extended.
+| Screen | Preview |
+| :--- | :--- |
+| **Start / Home Screen** | ![Start Screen](screenshots/home_screen.png) |
+| **Gameplay & In-Game Menu** | ![Gameplay & Pause Screen](screenshots/gameplay_and_pause.png) |
+| **Custom Player Starship** | ![Player Starship](screenshots/player_starship.png) |
 
 ---
 
-## 🎮 Gameplay
+## 🎯 1. Objective
 
+The objective of this project is to design, engineer, and evaluate an interactive 2D arcade game demonstrating the end-to-end integration of multimedia components:
+- Vector/sprite visual animation and particle physics
+- Real-time procedural audio synthesis using the Web Audio API
+- Responsive event handling across both desktop keyboards/mice and mobile multi-touch devices
+- Collision detection algorithms and mathematical state updates
+- Dynamic difficulty scaling and comprehensive game state management
+
+Each student is required to implement an individually customized version of the game that introduces unique mechanics, graphics, audio, and gameplay behavior beyond a standard template.
+
+---
+
+## 🕹️ 2. Game Description
+
+**Deep Space** is an action-packed 2D top-down space arcade survival game. The player pilots a customized starship navigating deep cosmos sectors, engaging hostile alien formations, collecting energy canisters, repair nanites, and weapon power-ups, while dodging hazardous asteroids, plasma mines, and enemy projectiles.
+
+### Core Gameplay Flow:
 ```
-  START
-    ↓
-  Move & Aim
-    ↓
-  Shoot Enemies
-    ↓
-  Collect Power-Ups
-    ↓
-  Survive the Wave
-    ↓
-  Next Wave (harder)
-    ↓
-  Player Dies → Game Over → Restart
-```
-
-- **WASD / Arrow Keys** — Move
-- **Mouse / Auto-aim** — Fire
-- **ESC** — Pause
-- **ENTER** — Restart after Game Over
-
----
-
-## ✨ Features
-
-### 🕹️ Core Gameplay
-- Smooth **WASD** player movement with physics-based velocity and clamped boundaries
-- **Continuous auto-fire** weapon system with bullet pooling for zero GC pressure
-- **Enemy AI** — scout ships that pursue the player with configurable aggression
-- **Object pooling** for bullets and enemies — no runtime garbage collection spikes
-
-### 🌊 Wave System
-- Structured **wave-based progression** — enemies spawn in organized waves
-- **Difficulty scaling** — each wave increases enemy count, speed, and health
-- **Rest phases** between waves with an animated countdown banner
-- Foundation ready for **boss waves** and **elite enemy** types
-
-### 💊 Power-Up & Loot System
-- Enemies drop **collectible power-ups** on death (probability-based)
-- **Rapid Fire** — temporarily doubles fire rate
-- **Damage Boost** — temporarily increases bullet damage
-- **Speed Boost** — temporarily increases player movement speed
-- **Shield** — absorbs the next hit (charges-based)
-- **Health Pack** — instantly restores player health
-- Extensible `PowerUpConfig` — add new power-up types in a single file
-
-### 🖥️ HUD & Game State
-- **Top-Left Health Card** — animated health bar, shield charges, active buff timers
-- **Top-Right Score Card** — score with bounce animation on kill, kill count, accuracy %
-- **Bottom-Left Weapon Card** — weapon name, level, firing status (READY / RAPID FIRE / OVERCHARGED)
-- **Bottom-Right Timer** — survival clock (MM:SS)
-- **Wave Banner** — animated slide-in/fade-out banner between waves
-- **Toast Notifications** — slide-in pickup confirmations that stack and auto-dismiss
-- **Debug Overlay** — FPS, entity count, wave state (dev builds only)
-
-### 📱 Responsive & Cross-Device
-- **Phaser Scale.FIT** — consistent gameplay area across all screen sizes
-- **Responsive HUD** — breakpoint-aware margins (mobile / tablet / desktop)
-- **LayoutManager** — single source of truth for all UI positioning; never hardcoded coordinates
-- **Safe Area** support for notched mobile screens
-
-### 🎨 UI / Visual Polish
-- Dark arcade aesthetic with translucent card panels and rounded borders
-- Health bar color transitions (green → orange → red) with shake on damage
-- Score value bounce animation on every kill
-- Scale-up bounce animation on Game Over overlay
-- Event-driven architecture — game systems never talk to UI directly
-
----
-
-## 🏗️ Architecture
-
-The project is built with a clear **layered architecture**:
-
-```
-src/
-├── config/          # Phaser game configuration
-├── core/            # Constants, SceneKeys, AssetKeys, Game bootstrap
-├── entities/        # Phaser GameObjects: Player, Enemy, Bullet, PowerUp
-├── managers/        # InputManager, CameraManager, GameStateManager
-├── scenes/          # BootScene, PreloadScene, MenuScene, GameScene
-├── systems/         # WeaponSystem, EnemySystem, CollisionSystem,
-│                    # WaveSystem, LootSystem, PowerUpSystem
-├── effects/         # Explosion effects
-├── ui/
-│   ├── HUD/         # TopLeftHUD, TopRightHUD, BottomLeftHUD, BottomRightHUD
-│   ├── MobileControls/
-│   ├── LayoutManager.ts      # Single source of truth for all positioning
-│   ├── WaveBanner.ts
-│   ├── GameOverOverlay.ts
-│   ├── NotificationManager.ts
-│   ├── UIAnimator.ts
-│   └── PauseMenu.ts
-├── theme/           # Colors, Typography, Spacing, UIConstants, UIText
-├── types/           # Shared TypeScript type definitions
-└── utils/           # Helper utilities
+  [ Start Screen / Main Menu ]
+             ↓ (Click "Start Mission" or Press Enter)
+  [ Active Gameplay: Sector 1 ]
+             ↓
+  • Pilot ship & aim weapons
+  • Collect Power-ups (Shield, Health, Speed, Blaster)
+  • Destroy Enemy Formations (Swarm, Sniper, Bomber, Elite, Boss)
+  • Score points & build combo multipliers
+             ↓
+  [ Pause State (ESC / Pause Button) ] ⇄ [ Resume / Settings / Audio Toggle ]
+             ↓
+  [ Waves Scale Difficulty & Introduce Boss Battles ]
+             ↓
+  Player HP Reaches 0
+             ↓
+  [ Game Over Screen ] → [ 🔄 Instant Restart (No Browser Refresh) ]
 ```
 
-### Key Design Decisions
+---
 
-| Pattern | Usage |
-|---|---|
-| **Event Bus** | All game systems emit events (`GAME_EVENTS`). UI listens. No direct coupling. |
-| **Object Pooling** | Bullets and enemies are pooled — reused, never destroyed/created at runtime |
-| **LayoutManager** | Every HUD widget asks `LayoutManager` for its position. No hardcoded `x, y`. |
-| **System Orchestration** | `GameScene` wires systems together; systems don't know about each other |
-| **Phaser Scale.FIT** | All players see the same world — no viewport advantage on ultrawide screens |
+## ⚙️ 3. Functional Requirements Fulfilled
+
+| Requirement | Implementation in Deep Space |
+| :--- | :--- |
+| **Game Interface** | High-definition animated title screen, in-game HUD (Dynamic HP bar, Shield bar, Wave indicator, Score display, Active Weapon Card, Interactive Weapon Tabs), Pause Menu, Settings Modal, and Game Over Screen. |
+| **Player Controls** | **Desktop**: WASD / Arrow keys for movement, Mouse for 360° aiming, Left-click / Spacebar for firing, `1`-`5` / `Q` / `E` / Scroll Wheel for weapon switching.<br>**Mobile / Touch**: Virtual analogue joystick (left thumb), tactile Fire Button (right thumb), and dedicated on-screen `[ 🔄 SWITCH ]` weapon tabs. |
+| **Animation** | 60 FPS continuous animation loop, parallax multi-layered scrolling starfield, animated celestial nebulae, drifting comets with light tails, pulsing engine thruster flame, dynamic shield aura, bullet tracers, and particle explosions. |
+| **Collision Detection** | Mathematical Radial Distance (Circle-to-Circle) and Axis-Aligned Bounding Box (AABB) checks for: (1) Player vs. Collectibles, (2) Player vs. Enemies/Hazards, (3) Player Projectiles vs. Enemies, (4) Enemy Projectiles vs. Player, and (5) Lightning Chain-Arc branching. |
+| **Scoring & Combo** | Dynamic score counter rewarding enemy destructions scaled by tier, accuracy combos, wave completion bonuses, and boss takedown rewards. |
+| **Difficulty Scaling** | Wave progression engine (`WaveSystem.ts`): increases enemy spawn rates, movement speeds, projectile fire rates, introduces advanced enemy AI types, and triggers epic Boss encounters every few waves. |
+| **Game States** | Clean finite state machine: `BOOT` → `PRELOAD` → `MENU` → `PLAYING` ⇄ `PAUSED` → `GAME_OVER`. |
+| **Multimedia Integration** | Dual-channel multimedia system: high-definition visual assets (vector-rendered ships, custom particles, glowing laser beams) + built-in procedural Web Audio synthesizer (`AudioManager.ts`). |
+| **Customization** | Custom 5-weapon arsenal with active switching, procedural Web Audio sound synthesizer, dynamic mobile touch screen-space hit testing, and high-DPI sci-fi typography. |
+| **Restart Mechanism** | Instant in-memory reset through `[ 🔄 RESTART MISSION ]` button or `ENTER` key without reloading the web page. |
 
 ---
 
-## 🚀 Getting Started
+## 🌟 4. Individual Customization Details (Abhishek Yaduwanshi)
+
+For this laboratory test, the following distinct customizations have been engineered and demonstrated:
+
+### A. 5-Tier Advanced Weapon Arsenal with In-Game Hot-Swapping
+The player can dynamically switch between five unique weapons, each having different visual sprites, firing rates, damage calculations, and ballistic behaviors:
+1. **Blaster (`BlasterWeapon.ts`)**: Rapid-fire twin plasma cannon with low energy consumption.
+2. **Plasma Shotgun (`ShotgunWeapon.ts`)**: 5-round angular spread weapon designed for close-quarters crowd control.
+3. **Homing Missiles (`MissileWeapon.ts`)**: Autonomous target-seeking explosive ordnance with dynamic steering vectors toward the closest hostile entity.
+4. **Laser Beam (`LaserBeamWeapon.ts`)**: High-intensity penetrating coherent energy beam that pierces through multiple enemies simultaneously.
+5. **Lightning Arc (`LightningWeapon.ts`)**: Electro-magnetic pulse weapon that discharges chain lightning jumping between nearby enemy hulls.
+
+### B. Procedural Web Audio Synthesizer (`AudioManager.ts`)
+In accordance with lab test constraints requiring local/self-created assets with zero external downloads:
+- Custom frequency-modulated (FM) audio synthesis using native HTML5 `AudioContext`.
+- Real-time synthesized sound effects:
+  - High-frequency laser chirps
+  - Shotgun burst pops
+  - Rocket thruster whistling
+  - Continuous laser harmonics
+  - Electrical lightning zaps
+  - Deep sub-bass explosion rumble
+  - Ambient deep-space cosmic drone with oscillating filter cutoff.
+
+### C. Screen-Space Independent UI & Multi-Device Responsive Input
+- Custom screen-space pointer hit detection (`handleScreenPointerDown`) completely decoupling UI interaction from world camera movement.
+- Full multi-touch support for iOS Safari and Android Chrome alongside desktop keyboard/mouse setups.
+
+---
+
+## 🧮 5. Algorithm & Collision Detection Logic
+
+### 1. Game Update Loop (Phaser 60 FPS Cycle)
+At every frame update $t$, delta time $\Delta t$ is calculated:
+1. **Input Polling**: Reads directional vector $\vec{V}_{input} = (v_x, v_y)$ from either keyboard keys or the virtual joystick displacement vector.
+2. **Kinematic Updates**:
+   $$\vec{P}_{player}(t + \Delta t) = \vec{P}_{player}(t) + \vec{V}_{input} \cdot S_{player} \cdot \Delta t$$
+   Velocity is damped with friction to simulate inertial space navigation.
+3. **Weapon Cooldown & Aiming**:
+   $$\theta = \text{atan2}(y_{pointer} - y_{player}, x_{pointer} - x_{player})$$
+4. **AI Behavior Trees**: Enemies calculate navigation vectors according to their archetype (Chase, Swarm, Sniper, Orbit, Bomber, Charge).
+
+### 2. Collision Detection Implementation
+The project combines two primary collision techniques:
+
+#### A. Radial (Circle-to-Circle) Distance Detection
+Used for fast circular entities such as bullets, missiles, energy power-ups, and spherical space dust:
+$$\text{Distance}^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2$$
+$$\text{Collision occurs if } \text{Distance}^2 \le (R_1 + R_2)^2$$
+*Optimization*: Calculation avoids the costly square-root operation ($\sqrt{}$) by comparing squared Euclidean distances directly.
+
+#### B. Axis-Aligned Bounding Box (AABB) Separating Axis Detection
+Used for non-spherical large entities, boss hitboxes, and screen boundaries:
+$$\text{Collision} = (A.x_{min} \le B.x_{max}) \land (A.x_{max} \ge B.x_{min}) \land (A.y_{min} \le B.y_{max}) \land (A.y_{max} \ge B.y_{min})$$
+
+#### C. Homing Missile Steering Algorithm
+Homing missiles scan for the nearest active enemy within range $R_{seek}$:
+$$\vec{D} = \vec{P}_{enemy} - \vec{P}_{missile}$$
+$$\theta_{target} = \text{atan2}(D_y, D_x)$$
+$$\theta_{new} = \theta_{current} + \text{clamp}(\theta_{target} - \theta_{current}, -\omega_{max} \cdot \Delta t, +\omega_{max} \cdot \Delta t)$$
+
+#### D. Lightning Arc Chain Algorithm
+Upon impact, the lightning projectile queries the `EnemySystem` spatial array for the $K$-nearest neighbor targets within chain radius $R_{chain} = 220\text{px}$, generating dynamic connecting lightning graphics and applying cascading damage.
+
+---
+
+## 🛠️ 6. Technical Stack & Constraints
+
+- **Language / Framework**: TypeScript 6.0 + Phaser 3/4 + HTML5 Canvas
+- **Bundler**: Vite 8.1
+- **Audio Architecture**: Native Web Audio API (`AudioContext`, `OscillatorNode`, `GainNode`, `BiquadFilterNode`)
+- **Graphics Pipeline**: Procedural Canvas 2D / WebGL rendering with antialiasing and subpixel smoothing
+- **Typography**: Google Web Fonts (*Orbitron*, *Rajdhani*)
+- **Compliance**:
+  - No external commercial game engines, no black-box generative AI models at runtime.
+  - 100% locally executed source code with modular architecture.
+  - Fully explainable data structures and algorithms.
+
+---
+
+## 🚀 7. Execution Instructions
 
 ### Prerequisites
+- Node.js (version 18.x or newer recommended)
+- npm (Node Package Manager)
 
-- [Node.js](https://nodejs.org/) v18 or higher
-- npm v9 or higher
+### Installation & Execution Steps
 
-### Installation
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Abhishek4852/deep-space-MM-Lab-Test.git
+   cd deep-space-MM-Lab-Test
+   ```
 
-```bash
-# Clone the repository
-git clone https://github.com/me-hv/deep-space.git
-cd deep-space
+2. **Install project dependencies:**
+   ```bash
+   npm install
+   ```
 
-# Install dependencies
-npm install
+3. **Start local development server:**
+   ```bash
+   npm run dev
+   ```
+   Open the displayed URL (usually `http://localhost:5173/`) in Google Chrome, Safari, or Microsoft Edge.
 
-# Start the development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Build for Production
-
-```bash
-npm run build
-npm run preview
-```
-
-### Other Commands
-
-```bash
-npm run lint      # ESLint check
-npm run format    # Prettier format
-```
+4. **Production Build & Verification:**
+   ```bash
+   npm run build
+   npm run preview
+   ```
 
 ---
 
-## 🛠️ Tech Stack
+## 🎮 8. Controls Reference
 
-| Technology | Version | Purpose |
-|---|---|---|
-| [Phaser](https://phaser.io/) | 4.2 | Game engine (rendering, physics, input, pooling) |
-| [TypeScript](https://www.typescriptlang.org/) | 6.0 | Type-safe game logic |
-| [Vite](https://vitejs.dev/) | 8.1 | Dev server & production bundler |
-| [ESLint](https://eslint.org/) | 10 | Code quality |
-| [Prettier](https://prettier.io/) | 3.9 | Code formatting |
+| Action | Desktop Controls | Mobile / Touch Controls |
+| :--- | :--- | :--- |
+| **Move Starship** | `W, A, S, D` or `Arrow Keys` | Left Virtual Joystick |
+| **Aim Weapon** | Mouse cursor position | Auto-aims towards movement vector |
+| **Fire Active Weapon** | Left Mouse Click or `Spacebar` | Right Virtual Fire Button |
+| **Switch Weapon** | `1`, `2`, `3`, `4`, `5` or `Q` / `E` / Scroll Wheel | On-screen `[ 🔄 SWITCH ]` button or direct Weapon Tabs |
+| **Pause / Resume** | `ESC` Key | On-screen Pause icon `[ ⏸️ ]` |
+| **Restart Game** | `ENTER` Key | `[ 🔄 RESTART MISSION ]` on Game Over screen |
 
 ---
 
-## 📁 Project Structure — Scene Flow
+## 📁 9. Repository Structure
 
 ```
-BootScene
-  └─→ PreloadScene (generates textures procedurally)
-        └─→ MenuScene (title, play button)
-              └─→ GameScene (main gameplay loop)
-                    ↑
-                    └── GameOverOverlay → restart → GameScene
+deep-space-MM-Lab-Test/
+├── index.html                   # HTML5 Entry Point with high-DPI viewport & sci-fi fonts
+├── package.json                 # Project dependencies and build scripts
+├── tsconfig.json                # Strict TypeScript configuration
+├── vite.config.ts               # Vite build configuration
+├── screenshots/                 # Application screenshots for evaluation
+│   ├── home_screen.png          # Main menu and title screen
+│   ├── gameplay_and_pause.png   # Active gameplay HUD and pause overlay
+│   └── player_starship.png      # Starship visual asset
+├── src/
+│   ├── main.ts                  # Phaser Game instantiation
+│   ├── audio/
+│   │   └── AudioManager.ts      # Procedural Web Audio API sound engine
+│   ├── config/
+│   │   ├── gameConfig.ts        # Canvas resolution, WebGL antialiasing, scale settings
+│   │   ├── EnemyConfig.ts       # Enemy archetype stat definitions
+│   │   └── WaveConfig.ts        # Dynamic wave scaling curves
+│   ├── core/
+│   │   ├── AssetKeys.ts         # Central asset registry
+│   │   └── SceneKeys.ts         # Scene navigation identifiers
+│   ├── entities/
+│   │   ├── Player.ts            # Player starship entity & movement
+│   │   ├── Bullet.ts            # Projectile entity with piercing & chain hooks
+│   │   └── PowerUp.ts           # Collectible energy/shield items
+│   ├── enemies/
+│   │   ├── Enemy.ts             # Base enemy class
+│   │   ├── EnemySpawner.ts      # Spatial wave spawning logic
+│   │   └── ai/                  # Distinct AI behaviors (Chase, Swarm, Sniper, Bomber)
+│   ├── weapons/
+│   │   ├── BaseWeapon.ts        # Abstract weapon base class
+│   │   ├── BlasterWeapon.ts     # Rapid auto-cannon
+│   │   ├── ShotgunWeapon.ts     # Multi-projectile spread weapon
+│   │   ├── MissileWeapon.ts     # Target-seeking ordnance
+│   │   ├── LaserBeamWeapon.ts   # Continuous piercing ray
+│   │   ├── LightningWeapon.ts   # EMP chain reaction weapon
+│   │   └── WeaponType.ts        # Weapon registry metadata
+│   ├── scenes/
+│   │   ├── BootScene.ts         # Boot lifecycle
+│   │   ├── PreloadScene.ts      # Procedural texture baking
+│   │   ├── MenuScene.ts         # Dynamic animated home screen & arsenal modal
+│   │   └── GameScene.ts         # Core gameplay orchestration
+│   ├── systems/
+│   │   ├── WeaponSystem.ts      # Multi-weapon manager & cycling
+│   │   ├── CollisionSystem.ts   # Mathematical hit detection & AOE
+│   │   ├── EnemySystem.ts       # Enemy pool & AI update loop
+│   │   ├── WaveSystem.ts        # Difficulty scaling waves
+│   │   └── BossSystem.ts        # Boss battle lifecycle & health bars
+│   └── ui/
+│       ├── PauseMenu.ts         # Screen-space responsive pause modal
+│       ├── GameOverOverlay.ts   # Screen-space restart overlay
+│       ├── SettingsOverlay.ts   # Audio & HUD settings modal
+│       └── HUD/                 # Real-time health, shield, weapon status
 ```
 
-All scene keys are centralized in [`src/core/SceneKeys.ts`](src/core/SceneKeys.ts) and all asset keys in [`src/core/AssetKeys.ts`](src/core/AssetKeys.ts).
+---
+
+## 🏆 10. Expected Learning Outcomes Demonstrated
+
+1. **Multimedia Integration**: Seamless real-time coordination between 2D animated graphics, particle effects, and procedural synthesized audio.
+2. **Interactive Event Handling**: Multi-platform input processing reconciling continuous mouse coordinates, keyboard keystrokes, and discrete mobile touch events.
+3. **Collision Detection & Physics**: Practical implementation of Euclidean distance checks and bounding boxes for real-time interactive game mechanics.
+4. **State Machine Design**: Robust architecture isolating game states (`Menu`, `Gameplay`, `Pause`, `Game Over`) ensuring smooth transitions and instant replayability without memory leaks.
+5. **Software Engineering**: Clean modular code organization in TypeScript, adhering to OOP principles, separation of concerns, and reproducible build systems.
 
 ---
 
-## 🗺️ Roadmap
-
-- [ ] **Boss Waves** — special boss enemy every 5 waves
-- [ ] **Elite Enemies** — shielded, fast, and kamikaze variants
-- [ ] **Weapon Upgrade Tree** — collect upgrade tokens to evolve your blaster
-- [ ] **High Score Persistence** — localStorage leaderboard
-- [ ] **Sound & Music** — procedural SFX and adaptive background music
-- [ ] **Particle Effects** — explosion debris, thruster trails, impact sparks
-- [ ] **Mobile Touch Controls** — on-screen virtual joystick and fire button
-- [ ] **Achievements** — milestone-based unlock system
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please open an issue first to discuss what you'd like to change.
-
-1. Fork the repo
-2. Create your feature branch (`git checkout -b feature/boss-wave`)
-3. Commit your changes (`git commit -m 'Add boss wave system'`)
-4. Push to the branch (`git push origin feature/boss-wave`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
-
----
-
-<div align="center">
-
-**Built with ❤️ using Phaser 4 + TypeScript**
-
-⭐ Star this repo if you enjoy the game!
-
-</div>
+**Developed & Submitted By:**  
+**Abhishek Yaduwanshi**  
+*Multimedia Systems Lab — 2026*
