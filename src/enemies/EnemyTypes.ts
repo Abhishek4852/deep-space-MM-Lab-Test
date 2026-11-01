@@ -1,0 +1,9 @@
+export enum EnemyType {
+  SCOUT = 'SCOUT',
+  INTERCEPTOR = 'INTERCEPTOR',
+  BOMBER = 'BOMBER',
+  KAMIKAZE = 'KAMIKAZE',
+  SNIPER = 'SNIPER',
+  SWARM = 'SWARM',
+  SHIELD = 'SHIELD'
+}

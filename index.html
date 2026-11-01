@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!--
+      viewport-fit=cover: Allows content to extend into notch/Dynamic Island area.
+      We then use CSS env(safe-area-inset-*) to pad UI away from those zones.
+    -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+
+    <!-- iOS full-screen web app support -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Deep Space" />
+
+    <!-- Android Chrome immersive mode -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#020617" />
+
+    <!-- Prevent text selection highlight on mobile -->
+    <meta name="format-detection" content="telephone=no" />
+    <style>
+      :root {
+        --sat: env(safe-area-inset-top, 0px);
+        --sar: env(safe-area-inset-right, 0px);
+        --sab: env(safe-area-inset-bottom, 0px);
+        --sal: env(safe-area-inset-left, 0px);
+      }
+    </style>
+    <meta name="author" content="Abhishek Yaduwanshi" />
+    <meta name="description" content="Deep Space Arcade Shooter - Created by Abhishek Yaduwanshi 2026" />
+    <!-- Sci-Fi High Definition Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+    <title>Deep Space</title>
+  </head>
+  <body>
+    <!-- Phaser canvas is injected here -->
+    <div id="app"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
