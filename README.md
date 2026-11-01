@@ -7,6 +7,10 @@
 **Project Title:** Deep Space — 2D Top-Down Customizable Arcade Game  
 **Academic Year:** 2026  
 **Watermark:** Created by Abhishek Yaduwanshi 2026  
+**Live Game URL:** [https://deep-space-mm-lab-test.vercel.app/](https://deep-space-mm-lab-test.vercel.app/)
+
+[![Play Live on Vercel](https://img.shields.io/badge/PLAY_LIVE-Vercel_Deployment-00C7B7?style=for-the-badge&logo=vercel&logoColor=white)](https://deep-space-mm-lab-test.vercel.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Abhishek4852/deep-space-MM-Lab-Test)  
 
 ---
 
@@ -158,7 +162,11 @@ Upon impact, the lightning projectile queries the `EnemySystem` spatial array fo
 
 ## 🚀 7. Execution Instructions
 
-### Prerequisites
+### 🌐 Instant Live Playable Demo (No Installation Required)
+Directly test and evaluate the game live on Vercel (Desktop & Mobile touch compatible):  
+👉 **[https://deep-space-mm-lab-test.vercel.app/](https://deep-space-mm-lab-test.vercel.app/)**
+
+### Local Setup Prerequisites
 - Node.js (version 18.x or newer recommended)
 - npm (Node Package Manager)
 
